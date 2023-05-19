@@ -1,12 +1,13 @@
 // TODO: Include packages needed for this application
 
-const { default: inquirer } = require("inquirer");
-
+const inquirer= require ("inquirer");
+const fs= require ("fs")
+const generateMarkdown=require("./utils/generatemarkdown")
 // TODO: Create an array of questions for user input
 const questions = [
     {
         type: "input",
-        name: "title",
+        name: "data.title",
         message: "What is the title for your project?",
         validate: (input) => {
             return input ? true : 'Please enter a title for your project';
@@ -50,10 +51,10 @@ const questions = [
             return input ? true : 'Please enter the framework.';
          },
     },{ 
-        type: "input",
+        type: "list",
         name: "license",
         message: "Please choose a license",
-        choices: ['Apache', 'IBM', 'MIT', 'ISC','Mozilla', 'None']
+        choices: ['Apache', 'IBM', 'MIT', 'ISC','Mozilla', 'None'],
         validate: (input) => {
             return input ? true : 'Please choose license';
          },
@@ -62,10 +63,10 @@ const questions = [
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    FileSystem.writeFile(fileName, data, (err)) => {
+    fs.writeFile(fileName, data, (err) => {
         if (err) throw err;
         console.log('The file is not saved');
-    };
+    });
 }
 
 // TODO: Create a function to initialize app
